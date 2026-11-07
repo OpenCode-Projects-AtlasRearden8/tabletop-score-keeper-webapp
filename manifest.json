@@ -1,0 +1,17 @@
+{
+  "name": "Tabletop Score Keeper",
+  "short_name": "Score Keeper",
+  "description": "Big-button offline score keeper for board game night. No accounts, no backend.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#14102b",
+  "theme_color": "#22135a",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

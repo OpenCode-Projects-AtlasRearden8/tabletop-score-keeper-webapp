@@ -1,0 +1,24 @@
+{
+  "name": "tabletop-score-keeper-webapp",
+  "version": "1.0.0",
+  "description": "Big-button offline score keeper for game night: tap plus or minus, undo mistakes, track the leader, and save end-of-game results locally. By Asdale Dynamics, LLC.",
+  "license": "MIT",
+  "author": "Asdale Dynamics, LLC",
+  "scripts": {
+    "test": "node --test tests/",
+    "start": "node server.js",
+    "start:examples": "node server.js 3000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dylanasdale/tabletop-score-keeper-webapp"
+  },
+  "private": true,
+  "keywords": [
+    "score-keeper",
+    "board-games",
+    "game-night",
+    "offline-first",
+    "accessible"
+  ]
+}

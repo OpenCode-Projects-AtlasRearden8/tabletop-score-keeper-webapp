@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="description" content="Big-button offline score keeper for board game night. No accounts, no backend." />
+  <meta name="theme-color" content="#22135a" />
+  <title>Tabletop Score Keeper — game night scoring</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="app-header">
+    <h1>Tabletop Score Keeper</h1>
+    <p class="tagline">Big buttons. No accounts. Works offline.</p>
+  </header>
+
+  <main id="main">
+    <!-- ======= SETUP SCREEN ======= -->
+    <section id="setup-screen" aria-labelledby="setup-heading">
+      <h2 id="setup-heading">Start a game</h2>
+      <form id="setup-form">
+        <div class="field">
+          <label for="game-name">Game name</label>
+          <input id="game-name" name="gameName" type="text" autocomplete="off"
+                 placeholder="e.g. Catan, Rummikub, Sko-fest" />
+        </div>
+
+        <div class="field">
+          <label for="players-input">Player names (one per line)</label>
+          <textarea id="players-input" name="players" rows="5" required
+                    placeholder="Alice&#10;Bob&#10;Cass"></textarea>
+          <p class="hint" id="players-hint">One name per line — at least one player required.</p>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-start">Start scoring</button>
+      </form>
+
+      <section id="saved-results" aria-labelledby="saved-heading">
+        <h3 id="saved-heading">Finished games (saved on this device)</h3>
+        <ul id="saved-list" aria-label="Previously finished games"></ul>
+        <button id="clear-saved" type="button" class="btn btn-ghost btn-small">
+          Clear saved results
+        </button>
+      </section>
+    </section>
+
+    <!-- ======= SCOREKEEPING SCREEN ======= -->
+    <section id="game-screen" aria-labelledby="game-title" hidden>
+      <div class="game-head">
+        <h2 id="game-title">Game</h2>
+        <div id="leader-banner" class="leader-banner" role="status" aria-live="polite">
+          <!-- e.g., "Leader: Bob (9)" or "Tie: Alice and Cass (3)" -->
+        </div>
+      </div>
+
+      <ul id="player-list" class="player-list" aria-label="Players and score controls"></ul>
+
+      <div class="action-row">
+        <button id="undo-btn" type="button" class="btn btn-undo" aria-describedby="undo-hint">
+          &#8630; Undo last tap
+        </button>
+        <span id="undo-hint" class="hint">Undoes the most recent point change.</span>
+      </div>
+
+      <div class="action-row">
+        <button id="end-btn" type="button" class="btn btn-primary">End game</button>
+        <button id="back-setup-btn" type="button" class="btn btn-ghost">New game</button>
+      </div>
+
+      <section id="history-section" aria-labelledby="history-heading">
+        <h3 id="history-heading">Round history</h3>
+        <ul id="history-list" aria-label="Every point change this game, newest first"></ul>
+        <p id="history-empty" class="hint">No points scored yet.</p>
+      </section>
+    </section>
+
+    <!-- ======= RESULTS SCREEN ======= -->
+    <section id="results-screen" aria-labelledby="results-heading" hidden>
+      <h2 id="results-heading">Final results</h2>
+      <p id="results-game-name" class="results-game-name"></p>
+      <div id="winner-banner" class="winner-banner" role="status"></div>
+      <ol id="standings-list" aria-label="Final standings"></ol>
+      <div class="action-row">
+        <button id="again-btn" type="button" class="btn btn-primary">Start another game</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <p>
+      Everything stays on this device — no accounts, no backend. Made by
+      <a href="https://dylanasdale.github.io" rel="external">Asdale Dynamics, LLC</a>.
+      MIT licensed.
+    </p>
+  </footer>
+
+  <div id="toast" role="status" aria-live="assertive" class="toast"></div>
+
+  <script type="module" src="src/app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("sw.js").catch(() => {});
+    }
+  </script>
+</body>
+</html>
